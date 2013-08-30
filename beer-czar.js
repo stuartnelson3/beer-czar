@@ -1,19 +1,11 @@
-if (Meteor.isClient) {
-  Template.hello.greeting = function () {
-    return "Welcome to beer-czar.";
-  };
+Beers = new Meteor.Collection('beers');
 
-  Template.hello.events({
-    'click input' : function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
-    }
-  });
-}
+Beers.allow({
+  insert: function(userId) {
+    return !!userId;
+  },
 
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
-}
+  remove: function(userId, post) {
+    return !!userId;
+  }
+})

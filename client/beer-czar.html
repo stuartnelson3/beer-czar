@@ -1,0 +1,23 @@
+<head>
+  <title>BEER CZAR</title>
+</head>
+
+<body>
+  {{> hello}}
+  {{> login}}
+</body>
+
+<template name='login'>
+  {{loginButtons}}
+</template>
+
+<template name="hello">
+  <h1>WELCOME TO BEER CZAR</h1>
+  {{#if currentUser}}
+    {{> profile}}
+  {{/if}}
+</template>
+
+<template name='profile'>
+  <img class='profile-picture' src='{{currentUser.services.google.picture}}' />
+</template>

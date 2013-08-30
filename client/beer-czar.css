@@ -1,0 +1,11 @@
+/* CSS declarations go here */
+body {
+  margin: 0 auto;
+  padding-top: 30px;
+  width: 960px;
+}
+
+.profile-picture {
+  border-radius: 10px;
+  width: 90px;
+}
