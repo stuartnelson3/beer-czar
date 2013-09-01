@@ -4,3 +4,10 @@ Accounts.validateNewUser(function(user) {
     return true;
   throw new Meteor.Error(403, "You need to have a neo.com email address!");
 });
+
+Accounts.onCreateUser(function(options, user) {
+  user.profile = options.profile;
+  user.profile['voteCount'] = 3;
+
+  return user;
+});
