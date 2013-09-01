@@ -5,7 +5,17 @@ Beer.allow({
     return !!userId;
   },
 
+  update: function() {
+    return true;
+  },
+
   remove: function(userId, post) {
     return !!userId;
+  }
+});
+
+Meteor.users.allow({
+  update: function() {
+    return true;
   }
 })
