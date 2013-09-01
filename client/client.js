@@ -12,6 +12,8 @@ Template.beerList.helpers({
   }
 });
 
+Template.beerList.rendered = function() { update(); };
+
 Template.addBeer.events({
   'click .js-addBeer': function(event, template) {
     var beerName = document.querySelector('.js-newBeerName').value;
