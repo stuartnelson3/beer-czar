@@ -47,7 +47,7 @@ Template.graph.rendered = function() {
     return b.votes;
   });
 
-  var chart = d3.select('.js-graph').append('svg')
+  var chart = d3.select('svg')
                 .attr("class", "chart")
                 .attr("width", 960)
                 .attr("height", 20 * beers.length);
@@ -61,7 +61,12 @@ Template.graph.rendered = function() {
             .domain([0,1,2,3])
             .rangeBands([0, 120]);
 
-  chart.selectAll("rect")
+  var selection = chart.selectAll("rect");
+
+  selection.transition().duration(750)
+  .attr('width', function(d) {return x(d) + 100});
+
+  selection
        .data(votes)
        .enter().append("rect")
        .attr("y", function(d, i) { return i * 20; })

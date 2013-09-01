@@ -10,11 +10,11 @@ body {
   width: 90px;
 }
 
-.js-graph rect {
+.chart rect {
   fill: steelblue;
   stroke: white;
 }
 
-.js-graph text {
+.chart text {
   fill: white;
 }
