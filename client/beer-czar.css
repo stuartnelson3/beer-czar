@@ -2,7 +2,7 @@
 body {
   margin: 0 auto;
   padding-top: 30px;
-  width: 960px;
+  width: 800px;
 }
 
 .profile-picture {
@@ -10,11 +10,11 @@ body {
   width: 90px;
 }
 
-.js-graph rect {
+.chart rect {
   fill: steelblue;
   stroke: white;
 }
 
-.js-graph text {
+.chart text {
   fill: white;
 }
