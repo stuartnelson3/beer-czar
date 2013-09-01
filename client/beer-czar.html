@@ -13,10 +13,8 @@
 </body>
 
 <template name='graph'>
-  {{#constant}}
     <section class='js-graph'>
     </section>
-  {{/constant}}
 </template>
 
 <template name='login'>
@@ -43,8 +41,11 @@
   {{#each beers}}
     <p>{{name}}</p>
     <p>{{votes}}</p>
-    {{#if hasVotes currentUser}}
-      <button class='js-vote' type='button' data-id='{{_id}}'>+1</button>
+    {{#if currentUser}}
+      {{#if hasVotes currentUser}}
+        <button class='js-addVote' type='button' data-id='{{_id}}'>+1</button>
+      {{/if}}
+      <button class='js-removeVote' type='button' data-id='{{_id}}'>-1</button>
     {{/if}}
     {{#if isAdmin currentUser}}
     <button class='js-removeBeer' type='button' data-id='{{_id}}'>Remove Beer</button>

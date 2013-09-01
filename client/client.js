@@ -28,7 +28,13 @@ Template.beerList.events({
     Meteor.call('removeBeer', id);
   },
 
-  'click .js-vote': function(event, template) {
+  'click .js-removeVote': function(event, template) {
+    var id = event.target.getAttribute('data-id');
+
+    Meteor.call('downvoteBeer', id);
+  },
+
+  'click .js-addVote': function(event, template) {
     var id = event.target.getAttribute('data-id');
 
     Meteor.call('upvoteBeer', id);
@@ -36,13 +42,47 @@ Template.beerList.events({
 });
 
 Template.graph.rendered = function() {
-  var data = Beer.find().fetch();
-  console.log(data);
-  var chart = d3.select('.js-graph');
+  var beers = Beer.find().fetch();
+  var votes = Beer.find().map(function(b) {
+    return b.votes;
+  });
 
-  chart.selectAll("div")
-       .data(data)
-       .enter().append("div")
-       .style("width", function(d) { return d.votes * 100 + "px"; })
-       .text(function(d) { return d.name + ': ' + d.votes + ' votes'; });
+  var chart = d3.select('.js-graph').append('svg')
+                .attr("class", "chart")
+                .attr("width", 960)
+                .attr("height", 20 * beers.length);
+
+  // make me work with attr('width') below
+  var x = d3.scale.linear()
+            .domain([0, d3.max(votes)])
+            .range([0, 480]);
+
+  // samesies
+  var y = d3.scale.ordinal()
+            .domain(votes)
+            .rangeBands([0, 120]);
+
+  chart.selectAll("rect")
+       .data(votes)
+       .enter().append("rect")
+       .attr("y", function(d, i) { return i * 20; })
+       .attr("width", x) // relative length
+       // .attr("width", function(d) {return d*100;}) // absolute length
+       .attr("height", 20);
+
+  var x2 = d3.scale.linear()
+            .domain([0, d3.max(votes)])
+            .range([0, 480]);
+
+  chart.selectAll("text")
+       .data(votes)
+       .enter().append("text")
+       .attr("x", x2)
+       // .attr("x", function(d) {return d.votes*100;})
+       .attr("y", function(d,i) { return i*20+10;})
+       .attr("dx", -3) // padding-right
+       .attr("dy", ".35em") // vertical-align: middle
+       .attr("text-anchor", "end") // text-align: right
+       // .text(function(d) { return d.name + ': ' + d.votes + ' votes'; });
+       .text(String);
 };

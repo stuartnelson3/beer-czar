@@ -15,7 +15,6 @@ Beer.allow({
 });
 
 Meteor.users.allow({
-  update: function() {
-    return true;
-  }
+  remove: function() { true; },
+  update: function() { return true; }
 })

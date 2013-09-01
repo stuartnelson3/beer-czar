@@ -10,11 +10,11 @@ body {
   width: 90px;
 }
 
-.js-graph div {
-  font: 10px sans-serif;
-  background-color: steelblue;
-  text-align: right;
-  padding: 3px;
-  margin: 1px;
-  color: white;
+.js-graph rect {
+  fill: steelblue;
+  stroke: white;
+}
+
+.js-graph text {
+  fill: white;
 }
