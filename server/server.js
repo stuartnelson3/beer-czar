@@ -14,8 +14,10 @@ Accounts.onCreateUser(function(options, user) {
 
 Meteor.methods({
   addBeer: function(name) {
-    if (!Beer.find({name: name}).count())
-      Beer.insert({name: name, votes: 0});
+    if (!Beer.find({name:name}).count()) {
+      Beer.insert({name:name,votes:1});
+      Meteor.users.update({_id:Meteor.userId()},{$inc:{'profile.voteCount':-1}})
+    }
   },
 
   upvoteBeer: function(id) {

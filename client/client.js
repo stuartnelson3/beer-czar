@@ -17,6 +17,7 @@ Template.addBeer.events({
     var beerName = document.querySelector('.js-newBeerName').value;
 
     Meteor.call('addBeer', beerName);
+    update();
   }
 
 });
@@ -42,6 +43,10 @@ Template.beerList.events({
 });
 
 Template.graph.rendered = function() {
+  update();
+};
+
+var update = function() {
   var beers = Beer.find().fetch();
   var votes = Beer.find().map(function(b) {
     return b.votes;
@@ -61,19 +66,16 @@ Template.graph.rendered = function() {
             .domain([0,1,2,3])
             .rangeBands([0, 120]);
 
-  var selection = chart.selectAll("rect");
+  var bar_data = chart.selectAll("rect").data(votes);
 
-  selection.transition().duration(750)
-  .attr('width', function(d) {return x(d) + 100});
-
-  selection
-       .data(votes)
+  bar_data
        .enter().append("rect")
        .attr("y", function(d, i) { return i * 20; })
-       // .attr("y", y)
        .attr("width", x) // relative length
-       // .attr("width", function(d) {return d*100;}) // absolute length
        .attr("height", 20);
+
+  bar_data.transition().duration(750)
+  .attr('width', function(d) {return x(d)});
 
   chart.selectAll("text")
        .data(beers)

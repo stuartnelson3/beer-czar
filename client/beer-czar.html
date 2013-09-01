@@ -3,13 +3,19 @@
 </head>
 
 <body>
+  <div class='col-md-8'>
   {{> hello}}
   {{> login}}
+  </div>
+  <div class='col-md-12'>
+  {{> graph}}
+  </div>
+  <div class='col-md-12'>
   {{#if currentUser}}
     {{> addBeer}}
     {{> beerList}}
   {{/if}}
-  {{> graph}}
+  </div>
 </body>
 
 <template name='graph'>
