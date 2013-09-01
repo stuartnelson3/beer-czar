@@ -19,7 +19,6 @@ Template.addBeer.events({
     var beerName = document.querySelector('.js-newBeerName').value;
 
     Meteor.call('addBeer', beerName);
-    update();
   }
 
 });
@@ -29,7 +28,6 @@ Template.beerList.events({
     var id = event.target.getAttribute('data-id');
 
     Meteor.call('removeBeer', id);
-    update();
   },
 
   'click .js-removeVote': function(event, template) {
