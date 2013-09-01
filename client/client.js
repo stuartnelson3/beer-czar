@@ -78,11 +78,10 @@ Template.graph.rendered = function() {
        .data(votes)
        .enter().append("text")
        .attr("x", x2)
-       // .attr("x", function(d) {return d.votes*100;})
        .attr("y", function(d,i) { return i*20+10;})
        .attr("dx", -3) // padding-right
        .attr("dy", ".35em") // vertical-align: middle
        .attr("text-anchor", "end") // text-align: right
-       // .text(function(d) { return d.name + ': ' + d.votes + ' votes'; });
-       .text(String);
+       .data(beers)
+       .text(function(d) { return d.name + ': ' + d.votes + ' votes'; });
 };
