@@ -53,9 +53,9 @@ var update = function() {
   });
 
   var chart = d3.select('svg')
-                .attr("class", "chart")
-                .attr("width", 960)
-                .attr("height", 20 * beers.length);
+                .attr('class', 'chart')
+                .attr('width', 960)
+                .attr('height', 20 * beers.length);
 
   var x = d3.scale.linear()
             .domain([0, d3.max(votes)])
@@ -66,24 +66,25 @@ var update = function() {
             .domain([0,1,2,3])
             .rangeBands([0, 120]);
 
-  var bar_data = chart.selectAll("rect").data(votes);
-
-  bar_data
-       .enter().append("rect")
-       .attr("y", function(d, i) { return i * 20; })
-       .attr("width", x) // relative length
-       .attr("height", 20);
+  var bar_data = chart.selectAll('rect').data(votes);
 
   bar_data.transition().duration(750)
   .attr('width', function(d) {return x(d)});
 
-  chart.selectAll("text")
+  bar_data
+       .enter().append('rect')
+       .attr('y', function(d, i) { return i * 20; })
+       .attr('width', x) // relative length
+       .attr('height', 20);
+
+
+  chart.selectAll('text')
        .data(beers)
-       .enter().append("text")
-       .attr("x", function(d,i) {return x(d.votes);})
-       .attr("y", function(d,i) { return i*20+10;})
-       .attr("dx", -3) // padding-right
-       .attr("dy", ".35em") // vertical-align: middle
-       .attr("text-anchor", "end") // text-align: right
+       .enter().append('text')
+       .attr('x', function(d,i) {return x(d.votes);})
+       .attr('y', function(d,i) { return i*20+10;})
+       .attr('dx', -3) // padding-right
+       .attr('dy', '.35em') // vertical-align: middle
+       .attr('text-anchor', 'end') // text-align: right
        .text(function(d) { return d.name + ': ' + d.votes + ' votes'; });
 };
