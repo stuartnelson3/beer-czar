@@ -71,13 +71,12 @@ Template.graph.rendered = function() {
        .attr("height", 20);
 
   chart.selectAll("text")
-       .data(votes)
+       .data(beers)
        .enter().append("text")
-       .attr("x", x)
+       .attr("x", function(d,i) {return x(d.votes);})
        .attr("y", function(d,i) { return i*20+10;})
        .attr("dx", -3) // padding-right
        .attr("dy", ".35em") // vertical-align: middle
        .attr("text-anchor", "end") // text-align: right
-       .data(beers)
        .text(function(d) { return d.name + ': ' + d.votes + ' votes'; });
 };
