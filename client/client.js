@@ -68,8 +68,8 @@ var update = function() {
 
 var transitionBarData = function(barData, xScale) {
   barData.enter().append('rect')
+        .attr('width', function() { return 0; })
         .attr('y', function(d, i) { return i * 20; })
-        .attr('width', xScale) // relative length
         .attr('height', 20);
 
   barData.transition().duration(750)
@@ -97,7 +97,8 @@ var transitionText = function(chartText, xScale) {
 };
 
 var xScale = function(domain) {
-  return  d3.scale.linear()
-            .domain([0, d3.max(domain)])
-            .range([0, 480]);
+  return function(d) { return d*50; }
+  // return  d3.scale.linear()
+  //           .domain([0, d3.max(domain)])
+  //           .range([0, 480]);
 };
