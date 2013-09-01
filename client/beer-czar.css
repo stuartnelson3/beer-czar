@@ -1,12 +1,10 @@
 /* CSS declarations go here */
-body {
-  margin: 0 auto;
-  padding-top: 30px;
-  width: 800px;
+.container {
+  padding-top: 40px;
 }
-
 .profile-picture {
   border-radius: 10px;
+  display: block;
   width: 90px;
 }
 

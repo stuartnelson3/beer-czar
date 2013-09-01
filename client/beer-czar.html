@@ -3,18 +3,25 @@
 </head>
 
 <body>
-  <div class='col-md-8'>
-  {{> hello}}
-  {{> login}}
-  </div>
-  <div class='col-md-12'>
-  {{> graph}}
-  </div>
-  <div class='col-md-12'>
-  {{#if currentUser}}
-    {{> addBeer}}
-    {{> beerList}}
-  {{/if}}
+  <div class='container'>
+    <div class='row'>
+      <div class='span4'>
+        <h1>WELCOME TO BEER CZAR</h1>
+      </div>
+      <div class='span3 offset2'>
+        {{> account}}
+        {{> login}}
+      </div>
+    </div>
+    <div class=''>
+    {{> graph}}
+    </div>
+    <div class=''>
+    {{#if currentUser}}
+      {{> addBeer}}
+      {{> beerList}}
+    {{/if}}
+    </div>
   </div>
 </body>
 
@@ -29,8 +36,7 @@
   {{loginButtons}}
 </template>
 
-<template name='hello'>
-  <h1>WELCOME TO BEER CZAR</h1>
+<template name='account'>
   {{#if currentUser}}
     {{> profile}}
   {{/if}}
@@ -56,7 +62,7 @@
       <button class='js-removeVote' type='button' data-id='{{_id}}'>-1</button>
     {{/if}}
     {{#if isAdmin currentUser}}
-    <button class='js-removeBeer' type='button' data-id='{{_id}}'>Remove Beer</button>
+    <button class='js-removeBeer' type='button' data-id='{{_id}}'>Remove {{name}}</button>
     {{/if}}
   {{/each}}
 </template>
