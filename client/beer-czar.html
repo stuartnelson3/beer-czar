@@ -5,13 +5,17 @@
 <body>
   {{> hello}}
   {{> login}}
+  {{#if currentUser}}
+    {{> addBeer}}
+    {{> beerList}}
+  {{/if}}
 </body>
 
 <template name='login'>
   {{loginButtons}}
 </template>
 
-<template name="hello">
+<template name='hello'>
   <h1>WELCOME TO BEER CZAR</h1>
   {{#if currentUser}}
     {{> profile}}
@@ -20,4 +24,19 @@
 
 <template name='profile'>
   <img class='profile-picture' src='{{currentUser.services.google.picture}}' />
+</template>
+
+<template name='addBeer'>
+  <input class='js-newBeerName' type='text' name='beerName' value=''/>
+  <button class='js-addBeer' type='button'>Add Beer</button>
+</template>
+
+<template name='beerList'>
+  {{#each beers}}
+    <p>{{name}}</p>
+    <p>{{votes}}</p>
+    {{#if isAdmin currentUser}}
+    <button class='js-removeBeer' type='button' data-id='{{_id}}'>Remove Beer</button>
+    {{/if}}
+  {{/each}}
 </template>

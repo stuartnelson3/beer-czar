@@ -1,6 +1,6 @@
-Beers = new Meteor.Collection('beers');
+Beer = new Meteor.Collection('beer');
 
-Beers.allow({
+Beer.allow({
   insert: function(userId) {
     return !!userId;
   },

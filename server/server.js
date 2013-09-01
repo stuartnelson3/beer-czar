@@ -11,3 +11,19 @@ Accounts.onCreateUser(function(options, user) {
 
   return user;
 });
+
+Meteor.methods({
+  addBeer: function(name) {
+    if (uniqueName(name))
+      Beer.insert({name: name, votes: 0});
+  },
+
+  uniqueName: function(name) {
+    return Beer.find({name: name}).length;
+  },
+
+  removeBeer: function(id) {
+    Beer.remove(id);
+  }
+
+});
