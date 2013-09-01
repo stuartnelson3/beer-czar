@@ -52,12 +52,11 @@ Template.graph.rendered = function() {
                 .attr("width", 960)
                 .attr("height", 20 * beers.length);
 
-  // make me work with attr('width') below
   var x = d3.scale.linear()
             .domain([0, d3.max(votes)])
             .range([0, 480]);
 
-  // samesies
+  // make me work with attr('y') below
   var y = d3.scale.ordinal()
             .domain([0,1,2,3])
             .rangeBands([0, 120]);
