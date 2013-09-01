@@ -12,8 +12,6 @@ Template.beerList.helpers({
   }
 });
 
-Template.beerList.rendered = function() { update(); };
-
 Template.addBeer.events({
   'click .js-addBeer': function(event, template) {
     var beerName = document.querySelector('.js-newBeerName').value;
@@ -44,10 +42,12 @@ Template.beerList.events({
 });
 
 Template.graph.rendered = function() {
-  update();
+  update(initialShow);
 };
 
-var update = function() {
+Template.beerList.rendered = function() { update(updateShow); };
+
+var update = function(updateFunction) {
   var beers = Beer.find().fetch();
   var votes = Beer.find().map(function(b) {
     return b.votes;
@@ -62,6 +62,7 @@ var update = function() {
   var chart_text = chart.selectAll('text').data(beers);
 
   transitionBarData(bar_data, xScale(votes));
+  updateFunction(bar_data, xScale(votes));
   transitionText(chart_text, xScale(votes));
 
 };
@@ -72,28 +73,36 @@ var transitionBarData = function(barData, xScale) {
         .attr('y', function(d, i) { return i * 20; })
         .attr('height', 20);
 
-  barData.transition().duration(750)
-        .attr('width', xScale);
-
   barData.exit()
         .transition().duration(750)
         .attr('width', xScale)
         .remove();
 };
 
-var transitionText = function(chartText, xScale) {
-  chartText.transition().duration(750)
-        .attr('x', function(d) {return xScale(d.votes);})
-        .text(function(d) {return d.name+': '+d.votes+' votes'});
+var initialShow = function(barData, xScale) {
+  barData.transition().duration(750)
+        .delay(function(d,i) { return i*250; })
+        .attr('width', xScale);
+};
 
+var updateShow = function(barData, xScale) {
+  barData.transition().duration(750)
+        .attr('width', xScale);
+};
+
+var transitionText = function(chartText, xScale) {
   chartText
        .enter().append('text')
-       .attr('x', function(d,i) {return xScale(d.votes);})
+       .attr('x', function(d,i) {return 0;})
        .attr('y', function(d,i) { return i*20+10;})
        .attr('dx', -3) // padding-right
        .attr('dy', '.35em') // vertical-align: middle
        .attr('text-anchor', 'end') // text-align: right
        .text(function(d) { return d.name + ': ' + d.votes + ' votes'; });
+
+  chartText.transition().duration(750)
+        .attr('x', function(d) {return xScale(d.votes);})
+        .text(function(d) {return d.name+': '+d.votes+' votes'});
 };
 
 var xScale = function(domain) {
