@@ -9,3 +9,12 @@ body {
   border-radius: 10px;
   width: 90px;
 }
+
+.js-graph div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}

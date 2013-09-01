@@ -34,3 +34,15 @@ Template.beerList.events({
     Meteor.call('upvoteBeer', id);
   }
 });
+
+Template.graph.rendered = function() {
+  var data = Beer.find().fetch();
+  console.log(data);
+  var chart = d3.select('.js-graph');
+
+  chart.selectAll("div")
+       .data(data)
+       .enter().append("div")
+       .style("width", function(d) { return d.votes * 100 + "px"; })
+       .text(function(d) { return d.name + ': ' + d.votes + ' votes'; });
+};

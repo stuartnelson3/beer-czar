@@ -9,7 +9,15 @@
     {{> addBeer}}
     {{> beerList}}
   {{/if}}
+  {{> graph}}
 </body>
+
+<template name='graph'>
+  {{#constant}}
+    <section class='js-graph'>
+    </section>
+  {{/constant}}
+</template>
 
 <template name='login'>
   {{loginButtons}}
