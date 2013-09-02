@@ -56,10 +56,12 @@
     <p>{{name}}</p>
     <p>{{votes}}</p>
     {{#if currentUser}}
-      {{#if hasVotes currentUser}}
+      {{#if canUpvote currentUser}}
         <button class='js-addVote' type='button' data-id='{{_id}}'>+1</button>
       {{/if}}
-      <button class='js-removeVote' type='button' data-id='{{_id}}'>-1</button>
+      {{#if canDownvote currentUser}}
+        <button class='js-removeVote' type='button' data-id='{{_id}}'>-1</button>
+      {{/if}}
     {{/if}}
     {{#if isAdmin currentUser}}
     <button class='js-removeBeer' type='button' data-id='{{_id}}'>Remove {{name}}</button>

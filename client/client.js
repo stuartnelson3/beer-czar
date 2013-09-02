@@ -7,8 +7,12 @@ Template.beerList.helpers({
     return user.services.google.email == 'stuart.nelson@neo.com'
   },
 
-  hasVotes: function(user) {
+  canUpvote: function(user) {
     return user.profile.voteCount > 0;
+  },
+
+  canDownvote: function(user) {
+    return user.profile.voteCount < 3;
   }
 });
 
