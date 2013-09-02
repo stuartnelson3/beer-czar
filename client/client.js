@@ -45,9 +45,11 @@ Template.graph.rendered = function() {
   update(initialShow);
 };
 
-Template.beerList.rendered = function() { update(updateShow); };
+Template.beerList.rendered = function() {
+  update(updateShow);
+};
 
-var update = function(updateFunction) {
+var update = function(updateBarFunction) {
   var beers = Beer.find().fetch();
   var votes = Beer.find().map(function(b) {
     return b.votes;
@@ -62,7 +64,7 @@ var update = function(updateFunction) {
   var chart_text = chart.selectAll('text').data(beers);
 
   transitionBarData(bar_data, xScale(votes));
-  updateFunction(bar_data, xScale(votes));
+  updateBarFunction(bar_data, xScale(votes));
   transitionText(chart_text, xScale(votes));
 
 };
@@ -72,11 +74,6 @@ var transitionBarData = function(barData, xScale) {
         .attr('width', function() { return 0; })
         .attr('y', function(d, i) { return i * 20; })
         .attr('height', 20);
-
-  barData.exit()
-        .transition().duration(750)
-        .attr('width', xScale)
-        .remove();
 };
 
 var initialShow = function(barData, xScale) {

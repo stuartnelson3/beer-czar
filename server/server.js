@@ -31,6 +31,7 @@ Meteor.methods({
   },
 
   removeBeer: function(id) {
-    Beer.remove(id);
+    Beer.update({_id:id},{$set:{votes:0}}); // hack to animate exit for graph
+    Meteor.setTimeout(function() {Beer.remove(id)}, 750);
   }
 });
