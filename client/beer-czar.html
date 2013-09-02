@@ -44,6 +44,16 @@
 
 <template name='profile'>
   <img class='profile-picture' src='{{currentUser.services.google.picture}}' />
+  {{#if hasVotedForBeer currentUser}}
+  <div>
+    What you voted for:
+    <ul>
+      {{#each userPreferredBeer}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  </div>
+  {{/if}}
 </template>
 
 <template name='addBeer'>

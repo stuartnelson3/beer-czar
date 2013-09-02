@@ -21,8 +21,16 @@ Meteor.methods({
   },
 
   upvoteBeer: function(id) {
-    Beer.update({_id:id},{$inc:{votes:1}});
-    Meteor.users.update({_id:Meteor.userId()},{$inc:{'profile.voteCount':-1}})
+    var beer = Beer.findOne({_id:id});
+    Beer.update({_id:id},{$inc:{votes:1}}, function(){
+      Meteor.users.update(
+        {_id:Meteor.userId()},
+        {
+          $inc:{'profile.voteCount':-1},
+          $addToSet:{'profile.chosenBeer':beer.name}
+        }
+      );
+    });
   },
 
   downvoteBeer: function(id) {
@@ -32,6 +40,10 @@ Meteor.methods({
 
   removeBeer: function(id) {
     Beer.update({_id:id},{$set:{votes:0}}); // hack to animate exit for graph
-    Meteor.setTimeout(function() {Beer.remove(id)}, 750);
+    Meteor.setTimeout(function() {
+      Beer.remove(id);
+      // TODO: Me next!
+      // Meteor.users.update({'profile.chosenBeers':{$in:[beerName]}}, {multi: true});
+    }, 750);
   }
 });

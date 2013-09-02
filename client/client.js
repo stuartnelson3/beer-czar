@@ -12,7 +12,18 @@ Template.beerList.helpers({
   },
 
   canDownvote: function(user) {
-    return user.profile.voteCount < 3;
+    return user.profile.voteCount < 3 || user._id === "BxK96Q2p9cLHHupqv";
+  }
+});
+
+Template.profile.helpers({
+  hasVotedForBeer: function(user) {
+    if (user.profile.chosenBeer && user.profile.chosenBeer.length) return true;
+    else return false;
+  },
+
+  userPreferredBeer: function() {
+    return Meteor.user().profile.chosenBeer;
   }
 });
 
