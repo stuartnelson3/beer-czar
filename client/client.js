@@ -4,7 +4,7 @@ Template.beerList.helpers({
   },
 
   isAdmin: function(user) {
-    return user.services.google.email == 'stuart.nelson@neo.com'
+    return user.services.google.email == 'stuart.nelson@neo.com';
   },
 
   canUpvote: function(user) {
@@ -29,9 +29,10 @@ Template.profile.helpers({
 
 Template.addBeer.events({
   'click .js-addBeer': function(event, template) {
-    var beerName = document.querySelector('.js-newBeerName').value;
+    var $beerName = document.querySelector('.js-newBeerName')
 
-    Meteor.call('addBeer', beerName);
+    Meteor.call('addBeer', $beerName.value);
+    $beerName.value = '';
   }
 
 });
