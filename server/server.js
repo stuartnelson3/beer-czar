@@ -16,7 +16,13 @@ Meteor.methods({
   addBeer: function(name) {
     if (name.length && !Beer.find({name:name}).count()) {
       Beer.insert({name:name,votes:1});
-      Meteor.users.update({_id:Meteor.userId()},{$inc:{'profile.voteCount':-1}})
+      Meteor.users.update(
+        {_id:Meteor.userId()},
+        {
+          $inc:{'profile.voteCount':-1},
+          $addToSet:{'profile.chosenBeer':name}
+        }
+      )
     }
   },
 
