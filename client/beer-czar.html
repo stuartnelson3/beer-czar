@@ -66,10 +66,10 @@
     <p>{{name}}</p>
     <p>{{votes}}</p>
     {{#if currentUser}}
-      {{#if canUpvote currentUser}}
+      {{#if canUpvote currentUser name}}
         <button class='js-addVote' type='button' data-id='{{_id}}'>+1</button>
       {{/if}}
-      {{#if canDownvote currentUser}}
+      {{#if canDownvote currentUser name}}
         <button class='js-removeVote' type='button' data-id='{{_id}}'>-1</button>
       {{/if}}
     {{/if}}

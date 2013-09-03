@@ -7,12 +7,13 @@ Template.beerList.helpers({
     return user.services.google.email == 'stuart.nelson@neo.com';
   },
 
-  canUpvote: function(user) {
-    return user.profile.voteCount > 0;
+  canUpvote: function(user, beerName) {
+    return user.profile.voteCount > 0 && user.profile.chosenBeer.indexOf(beerName) === -1;
   },
 
-  canDownvote: function(user) {
-    return user.profile.voteCount < 3 || user._id === "BxK96Q2p9cLHHupqv";
+  canDownvote: function(user, beerName) {
+    return (user.profile.voteCount < 3 && user.profile.chosenBeer.indexOf(beerName) >= 0)
+     || user._id === "BxK96Q2p9cLHHupqv"; // my id, remove later/implement admin mode
   }
 });
 

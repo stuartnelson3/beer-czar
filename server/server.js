@@ -36,7 +36,12 @@ Meteor.methods({
 
   downvoteBeer: function(id) {
     Beer.update({_id:id},{$inc:{votes:-1}});
-    Meteor.users.update({_id:Meteor.userId()},{$inc:{'profile.voteCount':1}})
+    var beerName = Beer.findOne(id).name
+
+    Meteor.users.update(
+      {_id:Meteor.userId()},
+      {$inc:{'profile.voteCount':1}, $pull:{'profile.chosenBeer':beerName}}
+    )
   },
 
   removeBeer: function(id) {
