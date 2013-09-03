@@ -44,7 +44,7 @@ Meteor.methods({
     Beer.update({_id:id},{$set:{votes:0}}); // hack to animate exit for graph
     Meteor.setTimeout(function() {
       Beer.remove(id);
-      Meteor.users.update({'profile.chosenBeer':{$in:[beer]}},{$pull:{'profile.chosenBeer':beer}}, {multi: true});
+      Meteor.users.update({'profile.chosenBeer':{$in:[beer]}},{$pull:{'profile.chosenBeer':beer},$inc:{'profile.voteCount':1}}, {multi: true});
     }, 750);
   }
 });
