@@ -22,6 +22,7 @@ Meteor.methods({
 
   upvoteBeer: function(id) {
     var beer = Beer.findOne({_id:id});
+
     Beer.update({_id:id},{$inc:{votes:1}}, function(){
       Meteor.users.update(
         {_id:Meteor.userId()},
@@ -39,11 +40,11 @@ Meteor.methods({
   },
 
   removeBeer: function(id) {
+    var beer = Beer.findOne(id).name
     Beer.update({_id:id},{$set:{votes:0}}); // hack to animate exit for graph
     Meteor.setTimeout(function() {
       Beer.remove(id);
-      // TODO: Me next!
-      // Meteor.users.update({'profile.chosenBeers':{$in:[beerName]}}, {multi: true});
+      Meteor.users.update({'profile.chosenBeer':{$in:[beer]}},{$pull:{'profile.chosenBeer':beer}}, {multi: true});
     }, 750);
   }
 });
