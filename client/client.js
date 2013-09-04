@@ -89,7 +89,7 @@ var update = function(updateBarFunction) {
 var transitionBarData = function(barData, xScale) {
   barData.enter().append('rect')
         .attr('width', function() { return 0; })
-        .attr('y', function(d, i) { return i * 20; })
+        .attr('y', function(d,i) { return i * 20; })
         .attr('height', 20);
 };
 
@@ -107,8 +107,8 @@ var updateShow = function(barData, xScale) {
 var transitionText = function(chartText, xScale) {
   chartText
        .enter().append('text')
-       .attr('x', function(d,i) {return 0;})
-       .attr('y', function(d,i) { return i*20+10;})
+       .attr('x', function(d,i) { return 0; })
+       .attr('y', function(d,i) { return i*20+10; })
        .attr('dx', -3) // padding-right
        .attr('dy', '.35em') // vertical-align: middle
        .attr('text-anchor', 'end') // text-align: right
@@ -116,7 +116,7 @@ var transitionText = function(chartText, xScale) {
 
   chartText.transition().duration(750)
         .attr('x', function(d) {return xScale(d.votes);})
-        .text(function(d) {return d.name+': '+d.votes+' votes'});
+        .text(function(d) { return d.name + ': ' + d.votes + ' votes'; });
 };
 
 var xScale = function(domain) {
