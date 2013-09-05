@@ -44,7 +44,7 @@
 
 <template name='profile'>
   <img class='profile-picture' src='{{currentUser.services.google.picture}}' />
-  {{#if hasVotedForBeer currentUser}}
+  {{#if hasVotedForBeer}}
   <div>
     What you voted for:
     <ul>
@@ -57,8 +57,10 @@
 </template>
 
 <template name='addBeer'>
-  <input class='js-newBeerName' type='text' name='beerName' placeholder='Add beer..' />
-  <button class='js-addBeer' type='button'>Add Beer</button>
+  {{#if hasVotes}}
+    <input class='js-newBeerName' type='text' name='beerName' placeholder='Add beer..' />
+    <button class='js-addBeer' type='button'>Add Beer</button>
+  {{/if}}
 </template>
 
 <template name='beerList'>
@@ -66,14 +68,14 @@
     <p>{{name}}</p>
     <p>{{votes}}</p>
     {{#if currentUser}}
-      {{#if canUpvote currentUser name}}
+      {{#if canUpvote name}}
         <button class='js-addVote' type='button' data-id='{{_id}}'>+1</button>
       {{/if}}
-      {{#if canDownvote currentUser name}}
+      {{#if canDownvote name}}
         <button class='js-removeVote' type='button' data-id='{{_id}}'>-1</button>
       {{/if}}
     {{/if}}
-    {{#if isAdmin currentUser}}
+    {{#if isAdmin}}
     <button class='js-removeBeer' type='button' data-id='{{_id}}'>Remove {{name}}</button>
     {{/if}}
   {{/each}}

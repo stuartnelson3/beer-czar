@@ -3,23 +3,29 @@ Template.beerList.helpers({
     return Beer.find();
   },
 
-  isAdmin: function(user) {
-    return user.services.google.email == 'stuart.nelson@neo.com';
+  isAdmin: function() {
+    return Meteor.user().services.google.email == 'stuart.nelson@neo.com';
   },
 
-  canUpvote: function(user, beerName) {
-    return user.profile.voteCount > 0 && user.profile.chosenBeer.indexOf(beerName) === -1;
+  canUpvote: function(beerName) {
+    return Meteor.user().profile.voteCount > 0 && Meteor.user().profile.chosenBeer.indexOf(beerName) === -1;
   },
 
-  canDownvote: function(user, beerName) {
-    return (user.profile.voteCount < 3 && user.profile.chosenBeer.indexOf(beerName) >= 0)
-     || user._id === "BxK96Q2p9cLHHupqv"; // my id, remove later/implement admin mode
+  canDownvote: function(beerName) {
+    return (Meteor.user().profile.voteCount < 3 && Meteor.user().profile.chosenBeer.indexOf(beerName) >= 0)
+     || Meteor.user()._id === "BxK96Q2p9cLHHupqv"; // my id, remove later/implement admin mode
+  }
+});
+
+Template.addBeer.helpers({
+  hasVotes: function() {
+    return Meteor.user().profile.voteCount > 0;
   }
 });
 
 Template.profile.helpers({
-  hasVotedForBeer: function(user) {
-    if (user.profile.chosenBeer && user.profile.chosenBeer.length) return true;
+  hasVotedForBeer: function() {
+    if (Meteor.user().profile.chosenBeer && Meteor.user().profile.chosenBeer.length) return true;
     else return false;
   },
 
