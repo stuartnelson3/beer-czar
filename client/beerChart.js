@@ -6,7 +6,7 @@ BeerChart = function() {
       return b.votes;
     });
 
-    var chart = d3.select('svg')
+    var chart = d3.select('svg.js-barchart')
     .attr('class', 'chart')
     .attr('width', 960)
     .attr('height', 20 * beers.length);

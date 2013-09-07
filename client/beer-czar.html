@@ -22,13 +22,16 @@
     {{/if}}
     {{> beerList}}
     </div>
+    <div class='userStatistics'>
+    {{> userStatistics }}
+    </div>
   </div>
 </body>
 
 <template name='graph'>
-  {{#constant}}
-    <svg class='js-graph'></svg>
-  {{/constant}}
+{{#constant}}
+<svg class='js-barchart'></svg>
+{{/constant}}
 </template>
 
 <template name='login'>
@@ -39,6 +42,20 @@
   {{#if currentUser}}
     {{> profile}}
   {{/if}}
+</template>
+
+<template name='userStatistics'>
+  {{#each usersWithVotes}}
+    <div>
+      {{profile.name}} still has {{profile.voteCount}} votes left!
+    </div>
+  {{/each}}
+</template>
+
+<template name='userStatisticsPieChart'>
+{{#constant}}
+  <svg class='js-piechart'></svg>
+{{/constant}}
 </template>
 
 <template name='profile'>
