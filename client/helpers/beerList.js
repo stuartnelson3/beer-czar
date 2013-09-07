@@ -4,7 +4,7 @@ Template.beerList.helpers({
   },
 
   isAdmin: function() {
-    return Meteor.user().services.google.email == 'stuart.nelson@neo.com';
+    return Meteor.user() && Meteor.user().services.google.email == 'stuart.nelson@neo.com';
   },
 
   canUpvote: function(beerName) {
