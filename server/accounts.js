@@ -8,6 +8,7 @@ Accounts.validateNewUser(function(user) {
 Accounts.onCreateUser(function(options, user) {
   user.profile = options.profile;
   user.profile['voteCount'] = 3;
+  user.profile['chosenBeer'] = [];
 
   return user;
 });
