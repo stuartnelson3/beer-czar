@@ -13,22 +13,21 @@
         {{> login}}
       </div>
     </div>
-    <div class=''>
+    <div>
     {{> graph}}
     </div>
-    <div class=''>
+    <div>
     {{#if currentUser}}
       {{> addBeer}}
-      {{> beerList}}
     {{/if}}
+    {{> beerList}}
     </div>
   </div>
 </body>
 
 <template name='graph'>
   {{#constant}}
-    <svg class='js-graph'>
-    </svg>
+    <svg class='js-graph'></svg>
   {{/constant}}
 </template>
 
