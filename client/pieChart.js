@@ -70,16 +70,10 @@ PieChart = function() {
   };
 
   var pcStructure = function(users) {
-    var structure = [];
     var zeroVote = {voteCount: 0, names: [], userCount: 0};
     var oneVote = {voteCount: 1, names: [], userCount: 0};
     var twoVote = {voteCount: 2, names: [], userCount: 0};
     var threeVote = {voteCount: 3, names: [], userCount: 0};
-
-    structure.push(zeroVote);
-    structure.push(oneVote);
-    structure.push(twoVote);
-    structure.push(threeVote);
 
     var hashMap = {
       0: zeroVote,
@@ -97,10 +91,11 @@ PieChart = function() {
       }
     }
 
-    var returnStruct = []
-    for (var i in structure) {
-      if (structure[i].userCount)
-        returnStruct.push(structure[i]);
+    var returnStruct = [];
+    var temp = [zeroVote,oneVote,twoVote,threeVote];
+    for (var i in temp) {
+      if (temp[i].userCount)
+        returnStruct.push(temp[i]);
     }
 
     return returnStruct;
