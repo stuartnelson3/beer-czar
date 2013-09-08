@@ -61,6 +61,9 @@
 
 <template name='profile'>
   <img class='profile-picture' src='{{currentUser.services.google.picture}}' />
+  <div>
+    You have {{currentUser.profile.voteCount}} votes.
+  </div>
   {{#if hasVotedForBeer}}
   <div>
     What you voted for:
