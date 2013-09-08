@@ -8,11 +8,11 @@
   width: 90px;
 }
 
-.chart rect {
+.js-barchart rect {
   fill: steelblue;
   stroke: white;
 }
 
-.chart text {
+.js-barchart text {
   fill: white;
 }
