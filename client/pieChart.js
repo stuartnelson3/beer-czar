@@ -5,8 +5,6 @@ PieChart = function() {
     var totalUsers = users.count;
     var chartSize = 480;
     var p = Math.PI*r;
-    var totalUsers = 10;
-    var offset = 0;
 
     var data = pcStructure(mappedUsers(users));
 
