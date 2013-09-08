@@ -40,18 +40,18 @@ PieChart = function() {
 
   var svg = function(size) {
     return d3.select('svg.js-piechart')
-    .attr('width', size)
-    .attr('height', size)
-    .append('g')
-    .attr('transform', 'translate(100,100)');
+      .attr('width', size)
+      .attr('height', size)
+      .append('g')
+      .attr('transform', 'translate(100,100)');
   };
 
   var createPieChart = function(data, arc, size) {
     var pie = d3.layout.pie()
-        .value(function(d) { return d.userCount; });
+      .value(function(d) { return d.userCount; });
 
     var color = d3.scale.ordinal()
-    .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00']);
+      .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00']);
 
     var g = svg(size).selectAll('.arc')
       .data(pie(data)).enter().append('g')
