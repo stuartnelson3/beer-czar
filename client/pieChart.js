@@ -23,12 +23,23 @@ PieChart = function() {
 
     circleData.transition().duration(2500)
       .delay(function(d,i) { return i * 1000; })
-      .attr('r', function(user) { return 30; })
-      .attr('fill', green)
-      .attr('cy', 90)
-      .attr('cx', function(d,i) { return 60 * (i+1); })
+      .attr('r', function(user) { return 20; })
+      .attr('fill', green.darker(2))
+      .attr('cy', 80)
+      .attr('cx', function(d,i) { return 80 * (i+1); })
     // var chart_text = chart.selectAll('text').data(beers);
 
+    var r = 100;
+    var p = Math.PI*r;
+    var arc = d3.svg.arc()
+                .innerRadius(r-2)
+                .outerRadius(r)
+                .startAngle(0)
+                .endAngle(2*Math.PI)
+
+    chart.append('path')
+      .attr('transform', 'translate(100,100)')
+      .attr('d', arc);
 
   };
 
