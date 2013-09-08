@@ -12,7 +12,6 @@ Template.beerList.helpers({
   },
 
   canDownvote: function(beerName) {
-    return (Meteor.user().profile.voteCount < 3 && Meteor.user().profile.chosenBeer.indexOf(beerName) >= 0)
-     || Meteor.user()._id === "BxK96Q2p9cLHHupqv"; // my id, remove later/implement admin mode
+    return (Meteor.user().profile.voteCount < 3 && Meteor.user().profile.chosenBeer.indexOf(beerName) >= 0);
   }
 });
