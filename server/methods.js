@@ -1,4 +1,11 @@
 Meteor.methods({
+  weeklyReset: function() {
+    var ids = Beer.find().map(function(beer) { return beer._id; });
+    for (var i = 0, len = ids.length; i < len; i++) {
+      Meteor.call('removeBeer', ids[i]);
+    }
+  },
+
   addBeer: function(name) {
     if (name.length && !Beer.find({name:name}).count()) {
       Beer.insert({name:name,votes:1});

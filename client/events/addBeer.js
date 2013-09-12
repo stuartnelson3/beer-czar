@@ -3,5 +3,6 @@ Template.addBeer.events({
     var $beerName = document.querySelector('.js-newBeerName');
 
     Meteor.call('addBeer', $beerName.value);
+    $beerName.value = '';
   }
 });

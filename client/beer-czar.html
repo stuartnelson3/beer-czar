@@ -73,6 +73,9 @@
     </ul>
   </div>
   {{/if}}
+  {{#if isAdmin}}
+  <button class='js-weeklyReset' type='button'>Weekly Reset</button>
+  {{/if}}
 </template>
 
 <template name='addBeer'>
