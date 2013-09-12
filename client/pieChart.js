@@ -3,7 +3,7 @@ PieChart = function() {
   var render = function(data) {
     var users = Meteor.users.find().fetch();
     var totalUsers = users.count;
-    var chartSize = 480;
+    var chartSize = 760;
     var p = Math.PI*r;
 
     var data = pcStructure(mappedUsers(users));
@@ -11,11 +11,11 @@ PieChart = function() {
     createPieChart(data, arc, chartSize);
   };
 
-  var r = 100;
+  var r = 160;
 
   var arc = d3.svg.arc()
     .innerRadius(function(d,i) {
-      return r-80;
+      return 0;
     }).outerRadius(function(d,i) {
       return r;
     });
@@ -43,7 +43,7 @@ PieChart = function() {
       .attr('width', size)
       .attr('height', size)
       .append('g')
-      .attr('transform', 'translate(100,100)');
+      .attr('transform', 'translate(200,200)');
   };
 
   var createPieChart = function(data, arc, size) {
